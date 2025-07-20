@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop - QØRE.86 | Futuristic Streetwear</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Montserrat:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ===== RESET & BASE ===== */
+        :root {
+            --primary: #000000;
+            --secondary: #ffffff;
+            --accent: #ff3366;
+            --accent-dark: #e62e5c;
+            --text: #e0e0e0;
+            --text-dark: #b0b0b0;
+            --gray: #222222;
+            --light-gray: #333333;
+            --font-heading: 'Orbitron', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: var(--font-body);
+            background-color: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        h1, h2, h3, h4 {
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 8vw, 3.5rem);
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        h2 {
+            font-size: clamp(1.5rem, 6vw, 2.5rem);
+            margin-bottom: 2rem;
+            text-align: center;
+            position: relative;
+            padding-bottom: 1rem;
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background: var(--accent);
+        }
+
+        h3 {
+            font-size: clamp(1.2rem, 5vw, 1.5rem);
+            margin: 1rem 0;
+        }
+
+        p {
+            margin-bottom: 1.5rem;
+            font-weight: 300;
+            font-size: clamp(0.9rem, 4vw, 1rem);
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            background-color: var(--accent);
+            color: var(--secondary);
+            border: none;
+            border-radius: 0;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--accent-dark);
+            transform: translateY(-3px);
+        }
+
+        .btn-outline {
+            display: inline-block;
+            padding: 14px 28px;
+            background-color: transparent;
+            color: var(--text);
+            border: 2px solid var(--text);
+            font-family: var(--font-heading);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: clamp(0.9rem, 4vw, 1rem);
+            min-width: 160px;
+            text-align: center;
+        }
+
+        .btn-outline:hover {
+            background-color: var(--text);
+            color: var(--primary);
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.9);
+            padding: 15px 0;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .navbar.scrolled {
+            padding: 10px 0;
+            background-color: rgba(0, 0, 0, 0.95);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: var(--font-heading);
+            font-size: clamp(1.3rem, 6vw, 1.8rem);
+            font-weight: 700;
+            letter-spacing: 2px;
+            z-index: 1001;
+        }
+
+        .logo .qore {
+            color: var(--secondary);
+        }
+
+        .logo .dot86 {
+            color: #00FFFF;
+        }
+
+        .nav-links ul {
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 2rem;
+            position: relative;
+        }
+
+        .nav-links a {
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: color 0.3s ease;
+            font-size: 1rem;
+            padding: 5px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .nav-icons {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .nav-icons a {
+            font-size: clamp(1.1rem, 5vw, 1.3rem);
+            transition: color 0.3s ease;
+            padding: 5px;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--secondary);
+            margin: 5px 0;
+            transition: all 0.3s ease;
+        }
+
+        /* ===== SHOP HERO SECTION ===== */
+        .shop-hero {
+            height: 60vh;
+            min-height: 500px;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            text-align: center;
+            padding-top: 80px;
+        }
+
+        .shop-hero-content {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .shop-hero h1 {
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        /* ===== FILTERS ===== */
+        .shop-toolbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid var(--light-gray);
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .filter-btn {
+            background: none;
+            border: none;
+            color: var(--text);
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border: 1px solid var(--light-gray);
+            transition: all 0.3s ease;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .sort-select {
+            background: var(--gray);
+            color: var(--text);
+            border: 1px solid var(--light-gray);
+            padding: 8px 15px;
+            font-family: var(--font-body);
+            min-width: 200px;
+        }
+
+        /* ===== PRODUCT GRID ===== */
+        .shop-section {
+            padding: 3rem 0;
+            background-color: var(--primary);
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: var(--accent);
+            color: var(--secondary);
+            padding: 5px 10px;
+            font-family: var(--font-heading);
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .product-card:hover img {
+            transform: scale(1.05);
+        }
+
+        .product-card h3 {
+            margin: 1.5rem 0;
+        }
+
+        .product-price {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 1.5rem;
+            font-family: var(--font-heading);
+        }
+
+        .current-price {
+            color: var(--accent);
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--text-dark);
+        }
+
+        /* ===== PAGINATION ===== */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px 0 50px;
+        }
+
+        .page-btn {
+            width: 40px;
+            height: 40px;
+            background-color: var(--gray);
+            border: none;
+            color: var(--text);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-heading);
+        }
+
+        .page-btn.active {
+            background-color: var(--accent);
+            color: var(--secondary);
+        }
+
+        .page-btn:hover:not(.active) {
+            background-color: var(--light-gray);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--gray);
+            padding: 3rem 0 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-col h4 {
+            color: var(--secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul a {
+            transition: color 0.3s ease;
+            font-size: 0.9rem;
+            display: inline-block;
+            padding: 2px 0;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-links a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--light-gray);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+        }
+
+        .footer-bottom {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 2rem;
+            border-top: 1px solid var(--light-gray);
+            gap: 1rem;
+            text-align: center;
+        }
+
+        .legal-links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .legal-links a {
+            transition: color 0.3s ease;
+            font-size: 0.8rem;
+        }
+
+        /* ===== MOBILE SPECIFIC STYLES ===== */
+        @media (max-width: 992px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                left: -100%;
+                width: 80%;
+                max-width: 300px;
+                height: 100vh;
+                background-color: var(--primary);
+                transition: all 0.5s ease;
+                z-index: 1000;
+                padding: 100px 30px 30px;
+                box-shadow: 5px 0 20px rgba(0, 0, 0, 0.3);
+            }
+            
+            .nav-links.active {
+                left: 0;
+            }
+            
+            .nav-links ul {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .nav-links li {
+                margin: 1rem 0;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: 10px 0;
+                font-size: 1.1rem;
+            }
+            
+            .hamburger {
+                display: block;
+                order: -1;
+            }
+            
+            .nav-icons {
+                margin-left: auto;
+                margin-right: 20px;
+            }
+            
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 6px);
+            }
+            
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+            
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -6px);
+            }
+            
+            .product-card img {
+                height: 350px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .shop-hero {
+                min-height: 400px;
+                padding-top: 70px;
+            }
+            
+            .btn, .btn-outline {
+                padding: 14px 24px;
+                min-width: 140px;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .product-card img {
+                height: 300px;
+            }
+            
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .footer-col {
+                border-bottom: 1px solid var(--light-gray);
+                padding-bottom: 1.5rem;
+            }
+            
+            .footer-col:last-child {
+                border-bottom: none;
+            }
+        }
+
+        /* ===== ANIMATIONS ===== */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        /* ===== TOUCH OPTIMIZATIONS ===== */
+        @media (hover: none) {
+            .btn:hover, .btn-outline:hover, .nav-links a:hover, 
+            .social-links a:hover, .legal-links a:hover {
+                transform: none;
+                background-color: var(--accent);
+                color: var(--secondary);
+            }
+            
+            .btn-outline:hover {
+                background-color: var(--text);
+                color: var(--primary);
+            }
+            
+            .product-card:hover img {
+                transform: none;
+            }
+        }
+
+        /* Prevent zoom on input focus on mobile */
+        @media screen and (max-width: 767px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <button class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <a href="index.html" class="logo">
+                <span class="qore">QØRE</span><span class="dot86">.86</span>
+            </a>
+            
+            <div class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="shop.html">Shop</a></li>
+                    <li><a href="collections.html">Collections</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="nav-icons">
+                <a href="#"><i class="fas fa-search"></i></a>
+                <a href="account.html"><i class="fas fa-user"></i></a>
+                <a href="cart.html"><i class="fas fa-shopping-bag"></i></a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Shop Hero Section -->
+    <section class="shop-hero">
+        <div class="shop-hero-content">
+            <h1 class="fade-in">SHOP QØRE.86</h1>
+            <p class="fade-in delay-1">Futuristic streetwear for the digital age</p>
+        </div>
+    </section>
+    
+    <!-- Shop Section -->
+    <section class="shop-section">
+        <div class="container">
+            <!-- Filters and Sorting -->
+            <div class="shop-toolbar">
+                <button class="filter-btn">
+                    <i class="fas fa-sliders-h"></i>
+                    FILTERS
+                </button>
+                <div>24 Products</div>
+                <select class="sort-select">
+                    <option value="newest">Newest First</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="popular">Most Popular</option>
+                </select>
+            </div>
+
+            <h2 class="fade-in">OUR COLLECTION</h2>
+            <div class="product-grid">
+                <!-- Product 1 -->
+                <div class="product-card fade-in delay-1">
+                    <span class="product-badge">NEW</span>
+                    <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Cyberpunk Hoodie">
+                    <h3>CYBERPUNK HOODIE</h3>
+                    <div class="product-price">
+                        <span class="current-price">€89.99</span>
+                        <span class="original-price">€120.00</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+                
+                <!-- Product 2 -->
+                <div class="product-card fade-in delay-1">
+                    <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Neon District Tee">
+                    <h3>NEON DISTRICT TEE</h3>
+                    <div class="product-price">
+                        <span class="current-price">€49.99</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+                
+                <!-- Product 3 -->
+                <div class="product-card fade-in delay-2">
+                    <span class="product-badge">SALE</span>
+                    <img src="https://images.unsplash.com/photo-1527719327859-c6ce80353573?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Data Pants">
+                    <h3>DATA PANTS</h3>
+                    <div class="product-price">
+                        <span class="current-price">€79.99</span>
+                        <span class="original-price">€99.99</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+                
+                <!-- Product 4 -->
+                <div class="product-card fade-in delay-2">
+                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Glitch Jacket">
+                    <h3>GLITCH JACKET</h3>
+                    <div class="product-price">
+                        <span class="current-price">€129.99</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+                
+                <!-- Product 5 -->
+                <div class="product-card fade-in delay-3">
+                    <img src="https://images.unsplash.com/photo-1591047139829-d91aecb6caea?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Binary Cap">
+                    <h3>BINARY CAP</h3>
+                    <div class="product-price">
+                        <span class="current-price">€39.99</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+                
+                <!-- Product 6 -->
+                <div class="product-card fade-in delay-3">
+                    <span class="product-badge">NEW</span>
+                    <img src="https://images.unsplash.com/photo-1620799140408-edc6dcb6d633?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Code Breaker Sneakers">
+                    <h3>CODE BREAKER SNEAKERS</h3>
+                    <div class="product-price">
+                        <span class="current-price">€149.99</span>
+                    </div>
+                    <a href="#" class="btn-outline">ADD TO CART</a>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination">
+                <button class="page-btn"><i class="fas fa-chevron-left"></i></button>
+                <button class="page-btn active">1</button>
+                <button class="page-btn">2</button>
+                <button class="page-btn">3</button>
+                <button class="page-btn"><i class="fas fa-chevron-right"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>SHOP</h4>
+                    <ul>
+                        <li><a href="shop/men.html">Men</a></li>
+                        <li><a href="shop/women.html">Women</a></li>
+                        <li><a href="shop/accessories.html">Accessories</a></li>
+                        <li><a href="shop/new-arrivals.html">New Arrivals</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>ABOUT</h4>
+                    <ul>
+                        <li><a href="about.html">Our Story</a></li>
+                        <li><a href="sustainability.html">Sustainability</a></li>
+                        <li><a href="careers.html">Careers</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>HELP</h4>
+                    <ul>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="shipping.html">Shipping & Returns</a></li>
+                        <li><a href="size-guide.html">Size Guide</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>CONNECT</h4>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                        <a href="#" aria-label="Discord"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 QØRE.86. All rights reserved.</p>
+                <p>Website made by GreekGamesStudios</p>
+                <div class="legal-links">
+                    <a href="privacy.html">Privacy Policy</a>
+                    <a href="terms.html">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Navigation
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const navbar = document.querySelector('.navbar');
+        
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            
+            // Prevent scrolling when menu is open
+            if (navLinks.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+                navbar.style.backdropFilter = 'none';
+            } else {
+                document.body.style.overflow = '';
+                navbar.style.backdropFilter = 'blur(10px)';
+            }
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+                document.body.style.overflow = '';
+                navbar.style.backdropFilter = 'blur(10px)';
+            });
+        });
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Animation on scroll with Intersection Observer for better performance
+        const fadeElements = document.querySelectorAll('.fade-in');
+        
+        const fadeObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                    fadeObserver.unobserve(entry.target);
+                }
+            });
+        }, {
+            threshold: 0.1
+        });
+        
+        fadeElements.forEach(element => {
+            fadeObserver.observe(element);
+        });
+        
+        // Prevent layout shift by preloading the web fonts
+        document.fonts.ready.then(() => {
+            document.body.style.visibility = 'visible';
+        });
+        
+        // Initially hide body to prevent FOUT (Flash of Unstyled Text)
+        document.body.style.visibility = 'hidden';
+    </script>
+</body>
+</html>
